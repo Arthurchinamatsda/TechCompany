@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+<body>
+    <style>
+        body{
+            padding: 10px;
+        }
+        #login{
+            background-color: aqua;
+            border-radius: 20%;
+        }
+        #divDoLogin{
+            display: none;
+            border-radius: 10%;
+            border: 1px #000 solid;
+            padding: 2% 5% 5% 5%;
+            width: 28%;
+            margin-left: 10%;
+            background-color: rgb(255, 251, 178);
+        }
+    </style>
+    <section>
+        <div>
+            <button id="login" onclick="login()"> LOGIN </button>
+            <div id="divDoLogin">
+                <h3>login</h3>
+                <h6>email</h6>
+                <input id="emailLogin" type="text">
+                <h6>senha</h6>
+                <input id="senhaEmailLogin" type="password">
+                <button id="voltarNaoSeiAinda" onclick="fechar()">voltar</button>
+                <button id="logarIrTelaHome" onclick="">logar</button>
+            </div>
+        </div>
+        
+        <button id="cadastro" onclick="cadastro()"> CADASTRA-SE </button>
+    </section>
+    <script>
+        function cadastro(){
+            
+        }
+        function login(){
+            document.getElementById('divDoLogin').style.display = 'block';
+            document.getElementById('login').style.display = 'none';
+        }
+        function fechar(){
+            document.getElementById('divDoLogin').style.display = 'none';
+            document.getElementById('login').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
