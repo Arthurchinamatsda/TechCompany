@@ -29,16 +29,22 @@
                 <input type="text" id="nomeCadastro">
                 <h6>email de preferencia</h6>
                 <input type="email" id="emailCadastro">
-                <h6>criar senha</h6>
-                <input type="password" id="criarSenhaCadastro">
-                <h6>confirmar a senha</h6>
-                <input type="password" id="confirmarSenhaCadastro">
                 <button id="voltar" onclick="fecharCadastro()">voltar</button>
-                <button id="proximoTelaCadastro">proximo</button>
+                <button id="proximoTelaCadastro" onclick="confirmandoEmailESenha()">proximo</button>
+            </div>
+            <div id="divDoCadastroSenha">
+                <h3>cadastra-se</h3>
+                <h6>criar senha</h6>
+                <input type="password" id="criarSenhaCadastro" required>
+                <h6>confirmar a senha</h6>
+                <input type="password" id="confirmarSenhaCadastro" required>
+                <button id="voltar" onclick="fecharCadastroSenha()">voltar</button>
+                <button id="proximoTelaCadastro" onclick="confirmandoSenha()">proximo</button>
             </div>
         </div>
     </section>
 
 </body>
 <script src="../java script/ScriptHome.js"></script>
+<script src="../java script/ScriptParaOJson.js"></script>
 </html>

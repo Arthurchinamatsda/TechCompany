@@ -38,3 +38,12 @@
     margin-left: 10%;
     background: linear-gradient(to top, #FF7F7F80, #FF7F7F, #0984E3);
 }
+#divDoCadastroSenha{
+    display: none;
+    border-radius: 10%;
+    border: 1px #000 solid;
+    padding: 2% 5% 5% 5%;
+    width: 28%;
+    margin-left: 10%;
+    background: linear-gradient(to top, #FF7F7F80, #FF7F7F, #0984E3);
+}
