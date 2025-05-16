@@ -14,15 +14,12 @@ public class PessoaController {
     }
 
     @PostMapping("/salvar")
-    public String salvarNome(@RequestParam String nome1) {
-        System.out.println("Nome recebido: " + nome1);
-        // Aqui depois vamos salvar no banco
-        return "redirect:/";
-    }
-    
-    @PostMapping("/salvar")
-    public String salvarSenha(@RequestParam String email1){
-        System.out.println("email recebido" + email1);
+    public String salvarNome(@RequestParam String nome1 , @RequestParam String email1 , @RequestParam String senha1 , @RequestParam String senha2) {
+        System.out.print("Nome recebido: " + nome1);
+        System.out.print("Email Recebido: " + email1);
+        System.out.print("Senha recebida: " + senha1);
+        System.out.print("Senha recebido: " + senha2);
+        return "IndexHomeHome";
     }
 }
 

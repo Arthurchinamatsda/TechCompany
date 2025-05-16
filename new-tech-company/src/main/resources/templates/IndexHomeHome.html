@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"></html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,5 +8,7 @@
 </head>
 <body>
     <h1>aaaaa</h1>
+    <p th:text= 'Você digitou: ' + ${nomeRecebido}></p>
+    <a href="/">Voltar</a>
 </body>
 </html>
