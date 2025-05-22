@@ -45,35 +45,40 @@
         </div>
     <script>
     const apiUrl = 'http://localhost:8080/api/usuarios';
-
-    document.getElementById('formulario').addEventListener('submit', async (e) => {
+document.getElementById('formulario').addEventListener('submit', async (e) => {
     e.preventDefault();
+
     const nome = document.getElementById('nomeCadastro').value;
     const email = document.getElementById('emailCadastro').value;
-    const senha5 = senhaConfirmada;
+    const senha = document.getElementById('criarSenhaCadastro').value;
+    const confirmarSenha = document.getElementById('confirmarSenhaCadastro').value;
+
+    if (senha !== confirmarSenha) {
+        alert("As senhas não coincidem!");
+        return;
+    }
+
     await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, email , senha5 })
+        body: JSON.stringify({ nome, email, senha })
     });
 
-        document.getElementById('formulario').reset();
-        carregarUsuarios();
-    });
-
-    async function carregarUsuarios() {
-        const resposta = await fetch(apiUrl);
-        const usuarios = await resposta.json();
-        const lista = document.getElementById('lista');
-        lista.innerHTML = '';
-        usuarios.forEach(u => {
-        const li = document.createElement('li');
-        li.textContent = `${u.nome} - ${u.email} - ${u.senha5}`;
-        lista.appendChild(li);
-    });
-    }
-
+    document.getElementById('formulario').reset();
     carregarUsuarios();
+});
+async function carregarUsuarios() {
+    const response = await fetch(apiUrl);
+    const usuarios = await response.json();
+    const listaUsuarios = document.getElementById('listaUsuarios');
+    listaUsuarios.innerHTML = '';
+
+    usuarios.forEach(usuario => {
+        const li = document.createElement('li');
+        li.textContent = `${usuario.nome} - ${usuario.email}`;
+        listaUsuarios.appendChild(li);
+    });
+}
 </script>
 </body>
 <script src="/ScriptHome.js"></script>
