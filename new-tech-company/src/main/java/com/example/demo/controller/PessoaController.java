@@ -1,25 +1,35 @@
 package com.example.demo.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+import com.example.demo.repossitory.Repositoriy;
+import com.example.demo.model.Pessoa;
+
+@RestController
+@RequestMapping("/api/usuarios")
+@CrossOrigin(origins = "*")
 public class PessoaController {
+    
+    @Autowired
+    private final Repositoriy repository1;
 
-    @GetMapping("/")
-    public String mostrarFormulario() {
-        return "IndexHome"; // Vai procurar form.html na pasta templates
+    public PessoaController(Repositoriy repository1) {
+        this.repository1 = repository1;
     }
 
-    @PostMapping("/salvar")
-    public String salvarNome(@RequestParam String nome1 , @RequestParam String email1 , @RequestParam String senha1 , @RequestParam String senha2) {
-        System.out.print("Nome recebido: " + nome1);
-        System.out.print("Email Recebido: " + email1);
-        System.out.print("Senha recebida: " + senha1);
-        System.out.print("Senha recebido: " + senha2);
-        return "IndexHomeHome";
+    @PostMapping
+    public Pessoa criar(@RequestBody Pessoa pessoa) {
+        return repository1.save(pessoa);
+    }
+
+    @GetMapping
+    public List<Pessoa> listar() {
+        return repository1.findAll();
     }
 }
+
+
 

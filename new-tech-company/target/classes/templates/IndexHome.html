@@ -1,51 +1,81 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="pt-br">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
-    <link rel="stylesheet" th:href="@{/resources/static/StyleHome.css}">
+    <link rel="stylesheet" href="/StyleHome.css">
 </head>
 
 <body id="corpo">
-    <form action="/salvar" method="post">
+    <button type="button" id="login" onclick="login()"> LOGIN </button>
+    <button type="button" id="cadastro" onclick="cadastro()"> CADASTRA-SE </button>
+    <form id="formulario">
+        <div id="divDoCadastro">
+            <h3>cadastra-se</h3>
+            <h6>nome</h6>
+            <input type="text" id="nomeCadastro" name="nome1" placeholder="Nome">
+            <h6>email de preferencia</h6>
+            <input type="email" id="emailCadastro" name="email1" placeholder="Email">
+            <button type="button" id="voltar" onclick="fecharCadastro()">voltar</button>
+            <button type="button" id="proximoTelaCadastro" onclick="confirmandoEmailESenha()">proximo</button>
+        </div>
+        <div id="divDoCadastroSenha">
+            <h3>cadastra-se</h3>
+            <h6>criar senha</h6>
+            <input type="password" id="criarSenhaCadastro" name="senha1"  placeholder="senha">
+            <h6>confirmar a senha</h6>
+            <input type="password" id="confirmarSenhaCadastro" name="senha2" placeholder="senha" >
+            <button type="button" id="voltar" onclick="fecharCadastroSenha()">voltar</button>
+            <button type="submit">proximo</button>
+        </div>
+    </form>
         <div id="loginCadastro">
             <div>
-                <button id="login" onclick="login()"> LOGIN </button>
                 <div id="divDoLogin">
                     <h3>login</h3>
                     <h6>email</h6>
                     <input id="emailLogin" type="email">
                     <h6>senha</h6>
                     <input id="senhaEmailLogin" type="password">
-                    <button id="voltar" onclick="fecharLogin()">voltar</button>
-                    <button id="logarIrTelaHome" onclick="">logar</button>
+                    <button type="button" id="voltar" onclick="fecharLogin()">voltar</button>
+                    <button type="button" id="logarIrTelaHome" onclick="">logar</button>
                 </div>
             </div>
-            <button id="cadastro" onclick="cadastro()"> CADASTRA-SE </button>
-            <div id="divDoCadastro">
-                <h3>cadastra-se</h3>
-                <h6>nome</h6>
-                <input type="text" id="nomeCadastro" name="nome1">
-                <h6>email de preferencia</h6>
-                <input type="email" id="emailCadastro" name="email1">
-                <button id="voltar" onclick="fecharCadastro()">voltar</button>
-                <button id="proximoTelaCadastro" onclick="confirmandoEmailESenha()">proximo</button>
-            </div>
-            <div id="divDoCadastroSenha">
-                <h3>cadastra-se</h3>
-                <h6>criar senha</h6>
-                <input type="password" id="criarSenhaCadastro" name="senha1" required>
-                <h6>confirmar a senha</h6>
-                <input type="password" id="confirmarSenhaCadastro" name="senha2" required>
-                <button id="voltar" onclick="fecharCadastroSenha()">voltar</button>
-                <button id="proximoTelaCadastro" onclick="confirmandoSenha()">proximo</button>
-            </div>
         </div>
-    </form>
-        
+    <script>
+    const apiUrl = 'http://localhost:8080/api/usuarios';
 
+    document.getElementById('formulario').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nome = document.getElementById('nomeCadastro').value;
+    const email = document.getElementById('emailCadastro').value;
+    const senha5 = senhaConfirmada;
+    await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, email , senha5 })
+    });
+
+        document.getElementById('formulario').reset();
+        carregarUsuarios();
+    });
+
+    async function carregarUsuarios() {
+        const resposta = await fetch(apiUrl);
+        const usuarios = await resposta.json();
+        const lista = document.getElementById('lista');
+        lista.innerHTML = '';
+        usuarios.forEach(u => {
+        const li = document.createElement('li');
+        li.textContent = `${u.nome} - ${u.email} - ${u.senha5}`;
+        lista.appendChild(li);
+    });
+    }
+
+    carregarUsuarios();
+</script>
 </body>
-<script th:src="@{/resources/static/ScriptHome.js}"></script>
+<script src="/ScriptHome.js"></script>
+<script src="/ScriptParaOBack.js"></script>
 </html>

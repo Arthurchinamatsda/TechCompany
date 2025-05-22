@@ -1,7 +1,7 @@
 #corpo{
     height: 100vh;
 }
-#loginCadastro{
+#loginCadastro , #login , #cadastro{
     display: flex;
     justify-content: center;  /* horizontal */
     align-items: center;      /* vertical */
