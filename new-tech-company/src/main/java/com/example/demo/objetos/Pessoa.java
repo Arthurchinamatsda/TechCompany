@@ -1,5 +1,6 @@
-package com.example.demo.model;
+package com.example.demo.objetos;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,10 +12,11 @@ public class Pessoa {
     private Long id;
 
     private String nome;
-
+    
+    @Column(unique = true)
     private String email;
     
-    private String senha5;
+    private String senha;
     // Getters and Setters
     public Long getId() {
         return id;
@@ -41,10 +43,10 @@ public class Pessoa {
     }
 
     public String getSenha(){
-        return senha5;
+        return senha;
     }
 
-    public void setSenha(String senha5){
-        this.senha5 = senha5;
+    public void setSenha(String senha){
+        this.senha = senha;
     }
 }

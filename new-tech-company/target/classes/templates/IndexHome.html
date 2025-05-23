@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
-    <link rel="stylesheet" href="/StyleHome.css">
+<link rel="stylesheet" href="/StyleHome.css">
 </head>
 
 <body id="corpo">
@@ -26,51 +26,56 @@
             <input type="password" id="criarSenhaCadastro" name="senha1"  placeholder="senha">
             <h6>confirmar a senha</h6>
             <input type="password" id="confirmarSenhaCadastro" name="senha2" placeholder="senha" >
-            <button type="button" id="voltar" onclick="fecharCadastroSenha()">voltar</button>
+            <button type="button" id="voltar1" onclick="fecharCadastroSenha()">voltar</button>
             <button type="submit">proximo</button>
         </div>
     </form>
         <div id="loginCadastro">
             <div>
                 <div id="divDoLogin">
-                    <h3>login</h3>
-                    <h6>email</h6>
-                    <input id="emailLogin" type="email">
-                    <h6>senha</h6>
-                    <input id="senhaEmailLogin" type="password">
-                    <button type="button" id="voltar" onclick="fecharLogin()">voltar</button>
-                    <button type="button" id="logarIrTelaHome" onclick="">logar</button>
+                    
+                    <label for="nomeLogin">Nome:</label><br>
+                    <input type="text" id="nomeLogin" placeholder="Digite seu nome"><br><br>
+
+                    <label for="emailLogin">Email:</label><br>
+                    <input type="email" id="emailLogin" placeholder="Digite seu email"><br><br>
+
+                    <label for="senhaEmailLogin">Senha:</label><br>
+                    <input type="password" id="senhaEmailLogin" placeholder="Digite sua senha"><br><br>
+
+                    <button onclick="login12()">Entrar</button>
+
                 </div>
             </div>
         </div>
-    <script>
-    const apiUrl = 'http://localhost:8080/api/usuarios';
-document.getElementById('formulario').addEventListener('submit', async (e) => {
-    e.preventDefault();
+<!-- ADICIONE ESTA LISTA SE QUISER VER OS USUÁRIOS CADASTRADOS (opcional) -->
+<ul id="listaUsuarios"></ul>
 
-    const nome = document.getElementById('nomeCadastro').value;
-    const email = document.getElementById('emailCadastro').value;
-    const senha = document.getElementById('criarSenhaCadastro').value;
-    const confirmarSenha = document.getElementById('confirmarSenhaCadastro').value;
 
-    if (senha !== confirmarSenha) {
-        alert("As senhas não coincidem!");
-        return;
+<script>
+const token = localStorage.getItem("token");
+
+fetch("http://localhost:8080/api/usuarios", {
+    method: "GET",
+    headers: {
+        "Authorization": "Bearer " + token
     }
+})
+.then(res => {
+    if (!res.ok) throw new Error("Erro: " + res.status);
+    return res.json();
+})
+.then(data => console.log(data))
+.catch(err => console.error("Erro ao buscar usuários:", err));
 
-    await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, email, senha })
-    });
 
-    document.getElementById('formulario').reset();
-    carregarUsuarios();
-});
+
 async function carregarUsuarios() {
     const response = await fetch(apiUrl);
     const usuarios = await response.json();
     const listaUsuarios = document.getElementById('listaUsuarios');
+
+    if (!listaUsuarios) return; // evita erro se o elemento não existir
     listaUsuarios.innerHTML = '';
 
     usuarios.forEach(usuario => {
@@ -79,8 +84,36 @@ async function carregarUsuarios() {
         listaUsuarios.appendChild(li);
     });
 }
+
+async function login12() {
+
+    const emailLogin = document.getElementById("emailLogin").value;
+    const senhaLogin = document.getElementById("senhaEmailLogin").value;
+
+    const resposta = await fetch('http://localhost:8080/token/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        email: emailLogin,
+        senha: senhaLogin
+    })
+
+    });
+
+    if (resposta.ok) {
+        const dados = await resposta.json();
+        console.log("Token JWT:", dados.token);
+        localStorage.setItem("token", dados.token); // SALVA O TOKEN LOCALMENTE
+        alert("Login feito com sucesso!");
+        // Redirecionar ou carregar nova tela se quiser
+    } else {
+        alert("Login inválido!");
+    }
+}
+
 </script>
+
 </body>
 <script src="/ScriptHome.js"></script>
-<script src="/ScriptParaOBack.js"></script>
+
 </html>
