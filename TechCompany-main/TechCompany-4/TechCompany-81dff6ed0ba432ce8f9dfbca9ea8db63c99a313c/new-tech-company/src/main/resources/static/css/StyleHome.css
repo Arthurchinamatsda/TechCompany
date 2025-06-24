@@ -1,45 +1,59 @@
 body{
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0;
+  background: linear-gradient(to left, #38CAFFE5, #4F42FF1A, #FF8C42);
 }
-#scene{
-  height: 200px;
-  width: 200px;
-  perspective: 600px;
-}
-#cube{
-  height: 100%;
-  width: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 1s;
-}
-.face{
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border: 10px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backface-visibility: hidden;
-}
-.front{transform: translateZ(100px);}
-.left{transform: translateY(-90deg) translateZ(100px);}
-.right{transform: translateY(90deg) translateZ(100px);}
-.back{transform: translateY(180deg) translateZ(100px);}
 
+/*coluna Esquerda*/
+#colunaEsquerda{
+  float: left;
+  width: 30vh;
+  height: 100vh;
+  background: linear-gradient(to bottom, #38CAFF, #4F42FF);
+}
+
+#cabecalho{ 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;  
+  border-bottom: #89d4ef 0.3vh solid;
+}
+
+
+#configuration{
+    margin-top: 3vh;
+}
+#configuration button{
+  width: 100%;
+  background-color: blue;
+  border: none;
+  color:  white;
+  margin-top: 1vh;
+}
+#criarProjeto{
+  margin-top: 10vh;
+    width: 100%;
+  background-color: blue;
+  border: none;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  color:  white;
+}
+#home , #projetosPessoais , #amigos{
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+
+/*div dos botões cadastro e login*/
 #divInicio{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: relative;
+  top: 2%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: end;
+  align-content: flex-end;
 }
 #cadastro, #login {
-  padding: 12px 24px;
+  padding: 2vh 2vh;
   margin: 10px;
   border: none;
   border-radius: 30px;
@@ -48,21 +62,53 @@ body{
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16);
-  transform-origin: center;
   background: linear-gradient(45deg, #38CAFF, #4F42FF);
   color: white;
 }
-
-#cadastro:hover, #login:hover {
+#cadastro:hover, #login:hover , #criarProjeto:hover , #home:hover, #projetosPessoais:hover, #amigos:hover{
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
-
-#cadastro:active, #login:active {
+#cadastro:active, #login:active , #criarProjeto:active , #home:active, #projetosPessoais:active, #amigos:active{
   transform: translateY(1px);
 }
+#search{
+  position: absolute;
+  top: 5%;
+  left: 5vh;
+  padding-bottom: 3vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+#search  input {
+  width:  100vh;
+  padding: 2.5vh;
+  border: none;
+  margin-bottom: 0.8vh;
+  border-radius: 10vh;
+  height: 3vh;
+}
+#search  input:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
 
-#divDoLogin, #divDoCadastro, #divDoCadastroSenha {
+#search  button {
+  width: 15vh;
+  padding: 2.5vh;
+  margin-left: 0.5vh;
+  border: none;
+  border-radius: 10vh;
+  background-color: #4F42FF;
+  color: white;
+  cursor: pointer;
+}
+
+
+/*caixa do login, cadastro e cadastro senha*/
+#divDoLogin, #divDoCadastro, #divDoCadastroSenha ,#divProjetos {
   width: 300px;
   padding: 25px;
   background: white;
@@ -78,19 +124,25 @@ body{
   display: none;
 }
 
+
+/*
+  não lembro oque faz isso, mas é importante
+  talvez seja para mostrar a caixa de login, cadastro e cadastro senha
+*/
 .form-visible {
   display: block !important;
   opacity: 1 !important;
   transform: translate(-50%, -50%) scale(1) !important;
 }
 
+
+/*butões*/
 .button-hidden {
   transform: scale(0.8);
   opacity: 0;
   pointer-events: none;
 }
-
-#divDoLogin button, #divDoCadastro button, #divDoCadastroSenha button {
+#divDoLogin button, #divDoCadastro button, #divDoCadastroSenha button , #divProjetos button {
   padding: 10px 20px;
   margin: 5px;
   border: none;
@@ -98,13 +150,14 @@ body{
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 #divDoLogin button:hover, #divDoCadastro button:hover, 
-#divDoCadastroSenha button:hover {
+#divDoCadastroSenha button:hover , #divProjetos button:hover {
   filter: brightness(90%);
 }
 
-#divDoLogin input, #divDoCadastro input, #divDoCadastroSenha input {
+
+/*inputs*/
+#divDoLogin input, #divDoCadastro input, #divDoCadastroSenha input , #divProjetos input {
   width: 100%;
   padding-top: 14px;
   padding-bottom: 14px;
@@ -113,21 +166,24 @@ body{
   border-radius: 5px;
   transition: all 0.3s ease;
 }
-
 #divDoLogin input:focus, #divDoCadastro input:focus, 
-#divDoCadastroSenha input:focus {
+#divDoCadastroSenha input:focus ,  #divProjetos input:focus {
   border-color: #4F42FF;
   box-shadow: 0 0 0 2px rgba(79, 66, 255, 0.2);
   outline: none;
 }
 
-#divDoLogin h3, #divDoCadastro h3, #divDoCadastroSenha h3 {
+
+/*textos*/
+#divDoLogin h3, #divDoCadastro h3, #divDoCadastroSenha h3 , #divProjetos h3 {
   color: #4F42FF;
   text-align: center;
   margin-bottom: 20px;
 }
 
-#divDoLogin label, #divDoCadastro label, #divDoCadastroSenha label {
+
+/*oque diabos é label?*/
+#divDoLogin label, #divDoCadastro label, #divDoCadastroSenha label , #divProjetos label {
   display: block;
   margin-top: 15px;
   margin-bottom: 5px;

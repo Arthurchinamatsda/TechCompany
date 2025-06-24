@@ -4,13 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
-    <link rel="stylesheet" href="/css/StyleHome.css">
+    <link rel="stylesheet" href="../static/css/StyleHome.css">
 </head>
 
+
 <body id="corpo">
+    <section id="colunaEsquerda">
+        <div id="cabecalho">
+            <h1>New Tech Company</h1>
+        </div>
+        <div id="configuration">
+            <button type="button" id="home">
+                <h3>HOME</h3>
+            </button>
+            <button type="button" id="amigos">
+                <H3>AMIGOS</H3>
+            </button>
+            <button type="button" id="projetosPessoais">
+                <h3>PROJETOS <br> PESSOAIS</h3>
+            </button>
+        </div>
+        <button type="button" id ="criarProjeto">
+                <h3>CRIAR</h3>
+            </button>
+    </section>
+
+    <div id="divProjetos">
+        <h3>CRIAR PROJETO</h3>
+        <form id="formCriarProjeto">
+            <label for="nomeProjeto">Nome do Projeto:</label>
+            <input type="text" id="nomeProjeto" name="nomeProjeto" required>
+            <label for="quantidadeDePessoa">Quantidade De Pessoa</label>
+            <input type="number" name="" id="">
+            <label for="descricaoProjeto">Descrição do Projeto:</label>
+            <textarea id="descricaoProjeto" name="descricaoProjeto" required></textarea>
+            <button type="submit">Voltar</button>
+            <button type="submit">Criar Projeto</button>
+        </form>
+    </div>
+
+
+
+
+
     <div id="divInicio">
         <button type="button" id="cadastro" onclick="cadastro()"> CADASTRA-SE </button>
         <button type="button" id="login" onclick="login()"> LOGIN </button>
+        <div id ="search">
+            <input type="text" id="searchInput" placeholder="Pesquisar...">
+            <button type="button" id="searchButton">Pesquisar</button>
+        </div>
     </div>
     <div id="formulaiosCadastroLogin">
         <form id="formsLogin">
@@ -45,6 +88,7 @@
                 </div>
             </div>
         </form>
+
     </div>
     <script>
     const apiUrl = 'http://localhost:8080/api/usuarios';
@@ -85,5 +129,5 @@ async function carregarUsuarios() {
 
 </script>
 </body>
-<script src="/js/ScriptHome.js"></script>
+<script src="../static/js/ScriptHome.js"></script>
 </html>
